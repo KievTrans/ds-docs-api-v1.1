@@ -45,18 +45,19 @@ Response body example for a failed request:
 
 The website sends the following data to the DikeShield Processing Gateway for payment processing.
 
-| Element  | Description                                                                                                    |
-| ------------- |----------------------------------------------------------------------------------------------------------------|
-| client_id  | A unique number managed by the website to identify the client.                                                 |
-| client_email  | An email identifier of the customer where an OTP message may be sent by the system prior to the payment.       |
-| client_private_name  | The first name of the customer.                                                                                |
+| Element             | Description                                                                                                    |
+|---------------------|----------------------------------------------------------------------------------------------------------------|
+| client_id           | A unique number managed by the website to identify the client.                                                 |
+| client_email        | An email identifier of the customer where an OTP message may be sent by the system prior to the payment.       |
+| client_private_name | The first name of the customer.                                                                                |
 | client_family_name  | The last name of the customer.                                                                                 |
-| amount | The amount of money to be processed by DikeShield.                                                             |
-| currency  | The currency of the transaction. Only `USD`, `EUR`, and `GBP` are supported.                                   |
-| description  | A brief description of the transaction or the product/service being purchased.                                 |
-| success_url  | The URL to which the customer should be redirected after successfully completing the payment.                  |
-| failed_url  | The URL to which the customer should be redirected if an error occurs during the payment.                      |
-| callback_url  | The URL to which DikeShield should send a notification of the payment status after processing the transaction. |
+| client_country      | The country code of the customer's country.                                                                    |
+| amount              | The amount of money to be processed by DikeShield.                                                             |
+| currency            | The currency of the transaction. Only `USD`, `EUR`, and `GBP` are supported.                                   |
+| description         | A brief description of the transaction or the product/service being purchased.                                 |
+| success_url         | The URL to which the customer should be redirected after successfully completing the payment.                  |
+| failed_url          | The URL to which the customer should be redirected if an error occurs during the payment.                      |
+| callback_url        | The URL to which DikeShield should send a notification of the payment status after processing the transaction. |
 
 ### Requst Example
 
@@ -66,6 +67,7 @@ The website sends the following data to the DikeShield Processing Gateway for pa
     "client_email": "john@acrobat.com",
     "client_private_name": "John",
     "client_family_name": "Miller",
+    "client_country": "US",
     "amount": 50.00,
     "currency": "USD"
     "description": "Short description of the transaction",
@@ -222,6 +224,12 @@ The response contains an array of transaction objects, the same as for the previ
 }
 ```
 
+## Country Codes
+
+`GET https://api.dshield.co/v1.1/countries`
+
+The method allows you to get a list of all supported country codes.
+
 ---
 
 That's it! This documentation should help you get started with using the DikeShield Processing Gateway API.
@@ -236,3 +244,8 @@ If you have any questions or concerns, please contact our support team at admin@
 
 - Added `client_private_name` and `client_family_name` parameters to the `payment` method.
 - Changed endpoint URL to `https://api.dshield.co/v1.1/`.
+
+### 2023-05-03
+
+- Added `client_country` parameter to the `payment` method.
+- Added `countries` method.
